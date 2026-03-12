@@ -108,6 +108,9 @@ app.post("/api/request-payment", async (req, res) => {
     });
     const payment = await response.json();
     console.log(payment);
+
+    res.status(200).json(payment);
+
   } catch (error) {
     console.error("❌ Error fetching payment session:", error);
     return null;

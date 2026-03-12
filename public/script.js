@@ -124,15 +124,17 @@ const showPaymentResult = (paymentId, status) => {
   payButton.addEventListener("click", async () => {
     payButton.disabled = true;
     payButton.textContent = "Processing...";
+    showLoadingOverlay();
 
     // Tokenize
     const tokenResult = await tokenize();
     if (!tokenResult?.data?.token) {
       console.error("Tokenization failed");
+      hideLoadingOverlay();
+      payButton.textContent = "Custom Pay Button";
       return;
     }
     const token = tokenResult.data.token;
-
 
     // DO WHATEVER WITH THE TOKEN
     // Create instrument (tok_ → src_) or create a payment request
@@ -145,25 +147,26 @@ const showPaymentResult = (paymentId, status) => {
 
     if (!instrument?.id) {
       console.error("Instrument creation failed");
+      hideLoadingOverlay();
+      payButton.textContent = "Custom Pay Button";
       return;
     }
 
-
-    const paymentRes = await fetch("api/request-payment", {
+    const paymentRes = await fetch("/api/request-payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ instrument }),
+      body: JSON.stringify({ instrument: instrument.id }),
     });
     const payment = await paymentRes.json();
 
     if (!payment?.id) {
       console.error("Payment request failed");
+      hideLoadingOverlay();
+      payButton.textContent = "Custom Pay Button";
       return;
     }
 
-    console.log("Payment request successful");
-    console.log(payment);
-    return;
+    showPaymentResult(payment.id, payment.status || "Completed");
   });
 
   if (await component.isAvailable()) {
