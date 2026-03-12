@@ -80,12 +80,12 @@ app.post("/api/create-instrument", async (req, res) => {
 });
 
 app.post("/api/request-payment", async (req, res) => {
-  let {token} = req.body;
+  let {instrument} = req.body;
   try {
     const payReq = {
       source: {
-        type: "token",
-        token: token,
+        type: "id",
+        id: instrument,
       },
       processing_channel_id: process.env.CKO_PROCESSING_CHANNEL_ID,
       amount: 500,

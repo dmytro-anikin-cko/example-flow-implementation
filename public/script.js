@@ -148,11 +148,11 @@ const showPaymentResult = (paymentId, status) => {
       return;
     }
 
-    
+
     const paymentRes = await fetch("api/request-payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token }),
+      body: JSON.stringify({ instrument }),
     });
     const payment = await paymentRes.json();
 
