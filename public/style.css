@@ -1,0 +1,12 @@
+body {
+    font-family: system-ui, sans-serif;
+  }
+  .methods {
+    margin-bottom: 20px;
+  }
+  .method-option {
+    margin-bottom: 10px;
+  }
+  #flow-container {
+    margin: 20px 0;
+  }

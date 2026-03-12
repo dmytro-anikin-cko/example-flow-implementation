@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <div
+      class="container max-w-md mx-auto mt-5 bg-white p-6 rounded-lg shadow-md"
+    >
+      <!-- Loading section -->
+      <div id="loader" class="text-center text-gray-600 mb-6">
+        <span class="animate-pulse"
+          >⏳ Your payment session is being loaded...</span
+        >
+      </div>
+
+      <!-- Session ID display -->
+      <div
+        id="session-status"
+        class="hidden text-sm text-gray-500 mb-6 text-center"
+      ></div>
+
+      <div id="flow-container" class="mt-8"></div>
+
+      <!-- Loading overlay (hidden by default, shown during payment processing) -->
+      <div id="loading-overlay" class="hidden text-center py-12">
+        <svg class="animate-spin h-10 w-10 text-indigo-600 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+        </svg>
+        <p class="text-gray-600 font-medium">Processing your payment...</p>
+      </div>
+
+      <!-- Payment result (hidden by default, shown after completion) -->
+      <div id="payment-result" class="hidden"></div>
+
+      <button
+        id="payButton"
+        disabled
+        class="w-full mt-6 py-3 px-6 text-white font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200"
+      >
+        Custom Pay Button
+      </button>
+    </div>
+
+    <script src="https://checkout-web-components.checkout.com/index.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
